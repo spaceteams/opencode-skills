@@ -1,9 +1,9 @@
 ---
 name: implementation-plan
-description: Create an implementation plan and execute it using strict TDD (red-green-refactor), John Ousterhout's deep-module philosophy, and the Boy Scout rule. Use when the user asks to implement a feature, build something, or execute a plan.
+description: Create an implementation plan using strict TDD (red-green-refactor), John Ousterhout's deep-module philosophy, and the Boy Scout rule. Use when the user asks to create a implementation plan.
 ---
 
-Create an implementation plan and execute it using **strict TDD**, **deep-module interface design**, and the **Boy Scout rule**.
+Create an implementation plan using **strict TDD**, **deep-module interface design**, and the **Boy Scout rule**. You won't implement the plan, but design the planned changes to fulfill the requirements.
 
 ### TDD
 Every behavior change starts with a failing test. Write **one test at a time**, make it pass with minimal code, then refactor. Horizontal slicing (writing all tests first, then all code) produces imaginary tests that test structure, not behavior. This is not good. Vertical slicing (one tracer bullet at a time) produces tests that are specifications and implementations that live longer.
@@ -27,7 +27,7 @@ Every time you touch a module, ask:
 ## Process
 
 ### 1. Explore, Understand & Design
-Before planning, understand the codebase prefering `cymbal_*` tools over grep. Clarify ambiguities with me one question at a time until we have a sharp plan.
+Before planning, understand the codebase preferring `codegraph_*` tools over grep. Clarify ambiguities with me one question at a time until we have a sharp plan.
 
 The type system is the Domain Documentation.
 
@@ -54,22 +54,25 @@ High-level strategy in 2–3 sentences.
 
 ## Explicit Interfaces / Types design
 - What interfaces, types and schemas need to change or be added, why and how. Be explicit in the design
+- Check if types, schemas or interfaces you want to create already exist and prefer reusing them with Pick/Omit
 - Use the DDD principles present in the codebase
 - Respect SOLID principles
 - Look for opportunities to deepen modules, instead off adding a new shallow module.
 - Good Interfaces & Types are the representation of the domain and ensure maintainability
 
 ## Interfaces to modify
-Communicate the changes to types and interfaces in code.
+Communicate the changes to types and interfaces in code using diff views to visually explain changes.
 
+### Realm(domain, UI, db) - Type/Interface
+path/to/file.ts
 ```diff
-// path/to/file.ts
-
 type Interface = {
 + addProp: number
 - removeProp: string
 }
 ```
+
+- Why that change is necessary and what the impact is to the realms
 
 ## Reuse
 - Analogous feature: `path/to/analog.ts#feature` – pattern for X

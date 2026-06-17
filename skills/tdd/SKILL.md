@@ -79,7 +79,7 @@ Clear name, tests real behavior, one thing
 <Bad>
 ```typescript
 test('retry works', async () => {
-  const mock = jest.fn()
+  const mock = vi.fn()
     .mockRejectedValueOnce(new Error())
     .mockRejectedValueOnce(new Error())
     .mockResolvedValueOnce('success');
@@ -94,15 +94,13 @@ Vague name, tests mock code
 - One behavior
 - Clear name
 - Real code (no mocks unless unavoidable)
-- No .toBeDefined() or generic expects
+- No .toBeDefined() or other generic expects like `.toBeTruthy()` on object roots
 - it.each for enumerating tests
-- fabbrica factories for prisma integration tests
-- Use and extend mimicry fixtures with traits to create needed domain objects
+- fabricca factories for prisma integration tests
+- Use and extend mimicry fixtures with traits to create required test objects for domain types
 - Storybook play functions to test UI components
 
 ### Verify RED - Watch It Fail
-
-**MANDATORY. Never skip.**
 
 ```bash
 pnpm --filter @repo/package test newTestFile.test.ts
@@ -347,7 +345,7 @@ Never fix bugs without a test.
 
 ## Testing Anti-Patterns
 
-When adding mocks or test utilities, read @testing-anti-patterns.md to avoid common pitfalls:
+When adding mocks or test utilities, avoid common pitfalls:
 - Testing mock behavior instead of real behavior
 - Adding test-only methods to production classes
 - Mocking without understanding dependencies
@@ -355,8 +353,5 @@ When adding mocks or test utilities, read @testing-anti-patterns.md to avoid com
 ## Final Rule
 
 ```
-Production code → test exists and failed first
-Otherwise → not TDD
+Production code are tests that existed and failed first
 ```
-
-No exceptions.
